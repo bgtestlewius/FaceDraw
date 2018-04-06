@@ -6,11 +6,11 @@
 
 import javax.swing.JFrame;
 import java.awt.Graphics;
-
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Frame;
 import java.util.ArrayList;
+import java.util.Random;
 
 //stpe 4 leverage shapeslibrary
 class FaceOvalDraw extends Oval{
@@ -20,7 +20,7 @@ class FaceOvalDraw extends Oval{
 	public void setDrawOvalFilledBlue() { drawOvalfilledblue = true;}
 	
 	//Override default constructor
-	public FaceOvalDraw () {
+	public FaceOvalDraw() {
 		super(0,0,0,0);
 		drawOvalfilledred =false;
 		drawOvalfilledblue =false;
@@ -66,15 +66,12 @@ class FaceOvalDraw extends Oval{
 	public final void setpositionY(int positionYIn) {positionY = positionYIn;}
 	public final int getpositionY() {return positionY;}
 		
-
-	
 	private int smileType;
 	public final void setSmileType(int smileTypeIn) {smileType= smileTypeIn;}
 	public final int getSmileType() {return positionX;}
 
 	
 	//step 5 draw itself
-	//steop 5 draew itself
 		public void paintComponent(Graphics g) {
 			g.drawOval(getPositionX(), getPositionY(), getWidth(), getHeight());
 			if (drawOvalfilledred) {
@@ -99,37 +96,67 @@ class FaceDesign extends FaceOvalDraw{
 	private FaceOvalDraw eyeL;
 	private FaceOvalDraw eyeR;
 
+
 	public FaceDesign() {
 		super(0,0,0,0);
+		eyeL = new FaceOvalDraw(0,0,0,0);
 		eyeL = new FaceOvalDraw(0,0,0,0);
 		eyeR = new FaceOvalDraw(0,0,0,0);
 
 	}
 	
+	public FaceDesign(int positionXIn, int positionYIn, int widthIn, int heightIn,int smileType ){
+
+		super(positionXIn,positionYIn,widthIn,heightIn);
+		int eyeRHeight = heightIn / 5;
+		int eyeRWidth = widthIn / 4 ;
+		int eyeLHeight = heightIn / 5 ;
+		int eyeLWidth = widthIn / 4 ;
+		int eyeLPostionX = positionXIn +10;
+		int eyeLPositionY = positionYIn + 20;
+		int eyeRPostionX = positionXIn  + 60 ;
+		int eyeRPositionY =  positionYIn + 20;
+		int aFacePostionX = positionXIn;
+		int aFacePostionY = positionYIn;
+		int asmileType = positionYIn;
+				
+
+		eyeL = new FaceOvalDraw(eyeLPostionX,eyeLPositionY,eyeLWidth,eyeLHeight);
+		eyeR = new FaceOvalDraw(eyeRPostionX,eyeRPositionY,eyeRWidth,eyeRHeight);
+		eyeL.setDrawOvalFilledRed();
+		eyeR.setDrawOvalFilledBlue();
+		System.out.println("printing faces...");
+	}
+	
+	
 	public FaceDesign(int positionXIn, int positionYIn, int widthIn, int heightIn){
 
 		super(positionXIn,positionYIn,widthIn,heightIn);
-		int eyeHeight = heightIn / 7;
-		int eyeWidth = eyeHeight * 2;
-		int eyeLPostionX = positionXIn + (widthIn / 2) - (eyeWidth / 2);
-		int eyeLPositionY = positionYIn + (heightIn / 3) - (eyeHeight /2) ;
-		int eyePostionX = positionXIn;
-		int eyeRPositionY = positionYIn;
+		int eyeRHeight = heightIn / 5;
+		int eyeRWidth = widthIn / 4 ;
+		int eyeLHeight = heightIn / 5 ;
+		int eyeLWidth = widthIn / 4 ;
+		int eyeLPostionX = positionXIn +10;
+		int eyeLPositionY = positionYIn + 20;
+		int eyeRPostionX = positionXIn  + 60 ;
+		int eyeRPositionY =  positionYIn + 20;
+		int aFacePostionX = positionXIn;
+		int aFacePostionY = positionYIn;
+		int asmileType = positionYIn;
+				
 
-
-
-
-		eyeL = new FaceOvalDraw(eyePostionX,eyeLPositionY,eyeWidth,eyeHeight);
-		eyeR = new FaceOvalDraw(eyePostionX,eyeRPositionY,eyeWidth,eyeHeight);
+		eyeL = new FaceOvalDraw(eyeLPostionX,eyeLPositionY,eyeLWidth,eyeLHeight);
+		eyeR = new FaceOvalDraw(eyeRPostionX,eyeRPositionY,eyeRWidth,eyeRHeight);
 		eyeL.setDrawOvalFilledRed();
 		eyeR.setDrawOvalFilledBlue();
+		System.out.println("printing faces...");
 	}
-	
 	//draw sad face itself
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		eyeL.paintComponent(g);
 		eyeR.paintComponent(g);
+		//aFace.paintComponent(g);
 		g.setColor(Color.black);
 		g.drawArc(getPositionX(),getPositionY()+(getHeight()/2), getWidth()-10, getHeight()-10, 45,90);
 	}
@@ -138,7 +165,7 @@ class FaceDesign extends FaceOvalDraw{
 
 	
 	//stpe 2 implement jpanel and graphics then add panel to frame
-class FacesPanel extends JPanel{
+class FacePanel extends JPanel{
 
 	//steop 6 create 1 of them
 	//create collectiomn of sadpanels
@@ -146,12 +173,26 @@ class FacesPanel extends JPanel{
 
 
 
-	public FacesPanel() {
+	public FacePanel() {
 		System.out.println("entered Face panel...");
 		//constructor
-		//private FaceDesign myFaceDesign;
-		myFaceDesign = new FaceDesign(100,100,80,160);
-		System.out.println("set design Face panel paint...");
+
+
+		int max = 400;
+		int min = 100;
+		// create instance of Random class
+
+		Random randomNum = new Random();
+		int one,two,three,four;
+		one = min + randomNum.nextInt(max);
+		two = min + randomNum.nextInt(max);
+		three = min + randomNum.nextInt(max);
+		four = min + randomNum.nextInt(max);
+		System.out.println("num" + one + " and " + two + " and " + three +  " and " + four );
+		
+
+		myFaceDesign = new FaceDesign(one,two,three,four);
+
 	}
 
 		public void paintComponent(Graphics g) {	
@@ -159,10 +200,24 @@ class FacesPanel extends JPanel{
 			//step 7 clean up
 			//g.setColor(Color.black);
 			//g.drawOval(900, 900, 900, 920);
-		
+			int max = 400;
+			int min = 100;
+			// create instance of Random class
+
+//			Random randomNum = new Random();
+//			int one,two,three,four,five;
+//			one = min + randomNum.nextInt(max);
+//			two = min + randomNum.nextInt(max);
+//			three = min + randomNum.nextInt(max);
+//			four = min + randomNum.nextInt(max);
+//			five = min + randomNum.nextInt(max);
+//			myFaceDesign = new FaceDesign(one,two,three,four,five);
+			
+
 			System.out.println("Face panel paint in...");	
 			//step 6.1
 			myFaceDesign.paintComponent(g);
+			
 
 		
 	}
@@ -170,8 +225,8 @@ class FacesPanel extends JPanel{
 
 
 
-	class FacesFrame extends JFrame{
-		FacesFrame(){
+	class FaceFrame extends JFrame{
+		FaceFrame(){
 			//step 1 create jframe
 			JFrame.setDefaultLookAndFeelDecorated(true);
 			JFrame myFrame = new JFrame("Face Draw");
@@ -179,13 +234,13 @@ class FacesPanel extends JPanel{
 			myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			myFrame.setVisible(true);	
 			//return FacesFrame();
-			FacesPanel myFacesPanel = new FacesPanel();
+			FacePanel myFacesPanel = new FacePanel();
 			myFrame.add(myFacesPanel);
 	}
 
-		private Object FacesFrame() {
+		private Object FaceFrame() {
 			// TODO Auto-generated method stub
-			return FacesFrame();
+			return FaceFrame();
 		}
 }
 	public class FaceDraw {
@@ -193,22 +248,39 @@ class FacesPanel extends JPanel{
 		public static void main(String[] args) {
 			System.out.println("Starting Face Draw...");
 			//using jFrame
-			JFrame myFrame = new FacesFrame();
-			ArrayList<FacesPanel> FaceList = new ArrayList<FacesPanel>();
+			JFrame myFrame = new FaceFrame();
 			
+
+			//FacesPanel myFacesPanel = new FacesPanel();
+			ArrayList<FaceFrame> FaceList = new ArrayList<FaceFrame>();
 			for (int loopCount=1; loopCount<4; loopCount++){
-				FaceList.add(new FacesPanel());
-				//shapeList.add(new Rectangle(10-loopCount,4.22));
-			System.out.println("Starting Face panel...");
 				//FacesPanel myFacesPanel = new FacesPanel();
-				//myFrame.add(myFacesPanel);
+				myFrame.add(new FacePanel());
 			}
 			
+			//for (int loopCount=1; loopCount<4; loopCount++){
+			//FaceList.add(new FacesPanel());
+			//shapeList.add(new Rectangle(10-loopCount,4.22));
+			//System.out.println("Starting Face panel..." + loopCount);
+			//FacesPanel myFacesPanel = new FacesPanel();
+			//myFrame.add(myFacesPanel);
+		//}
+			
+//			for (int loopCount=1; loopCount<4; loopCount++){
+//				FaceList.add(new FacesPanel());
+//				//shapeList.add(new Rectangle(10-loopCount,4.22));
+//				System.out.println("Starting Face panel..." + loopCount);
+//				//FacesPanel myFacesPanel = new FacesPanel();
+//				//myFrame.add(myFacesPanel);
+//			}
+			
 			//Poly inplmemented via virtual tables
-//			for(FacesPanel s: FaceList){
-//				System.out.println(s);
-//				FacesPanel myFacesPanel = new FacesPanel();
-//				myFrame.add(myFacesPanel);
+			//for(FacesPanel  s: FaceList){
+				//System.out.println(s);
+				//FacesPanel myFacesPanel = new FacesPanel();
+				//s.add(FacesPanel());
+				//System.out.println("Printes");
+			//}
 //				//s.add
 //				//System.out.format("Area = %.1f\n", s.CalcFaceDesignLayout());
 //				
