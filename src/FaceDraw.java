@@ -75,6 +75,7 @@ class FaceOvalDraw extends Oval{
 	private int SmileType;
 	public final void setSmileType(int smileTypeIn) {SmileType= smileTypeIn;}
 	public final int getSmileType() {return SmileType;}
+	
 
 
 	//steop 5 draew itself
@@ -91,6 +92,10 @@ class FaceOvalDraw extends Oval{
 	        //g.fillOval(70, 60, 20, 20);
 	        //g.setColor(Color.RED);          // mouth
 	        //g.drawLine(40, 100, 80, 100);
+			
+			//g.drawOval(getPositionX(), getPositionY(), getWidth(), getHeight());
+				//g.setColor(Color.red);
+				//g.fillOval(getPositionX()+1, getPositionY()+1, getWidth()-2, getHeight()-2);
 			System.out.format("OvalDraw.paintComponent(x=%d,y=%d,w=%d,h=d)\n",
 					getPositionX(), getPositionY(), getWidth(), getHeight());
 		}
@@ -104,8 +109,8 @@ class SadFace extends FaceOvalDraw {
 
 	public SadFace() {
 		super(0,0,0,0,0);
-//		eyeL = new FaceOvalDraw(0,0,0,0);
-//		eyeR = new FaceOvalDraw(0,0,0,0);
+		eyeL = new FaceOvalDraw(0,0,0,0);
+		eyeR = new FaceOvalDraw(0,0,0,0);
 
 		
 	}
@@ -145,8 +150,34 @@ class SadFace extends FaceOvalDraw {
 ////		eyeR.setDrawOvalFilledRed();
 //
 //		
+//		int eyeLHeight = heightIn / 2;
+//		int eyeLWidth = eyeLHeight * 2;
+//		int eyeLPostionX = positionXIn + (widthIn / 2) - (eyeLWidth / 2);
+//		int eyeLPositionY = positionYIn + (heightIn / 3) - (eyeLHeight /2) ;
 		
-		setSmileType(1);
+		//setSmileType(3);
+		Random rand = new Random(); 
+		int SmilesTypeIn = rand.nextInt(3); 
+		setSmileType(SmilesTypeIn);
+		
+		int eyeLHeight = heightIn / 5;
+		int eyeLWidth = eyeLHeight /2;
+		int eyeLPostionX = positionXIn + (widthIn / 4) - (eyeLWidth / 4);
+		int eyeLPositionY = positionYIn + (heightIn / 3) - (eyeLHeight /2) ;
+		
+		
+		int eyeRHeight = heightIn /5;
+		int eyeRWidth = eyeLHeight /2;
+		int eyeRPostionX = positionXIn + (widthIn - 40) - (eyeRWidth /4);
+		int eyeRPositionY = positionYIn + (heightIn / 3) - (eyeRHeight /2) ;
+
+
+
+		eyeL = new FaceOvalDraw(eyeLPostionX,eyeLPositionY,eyeLWidth,eyeLHeight);
+		eyeR = new FaceOvalDraw(eyeRPostionX,eyeRPositionY,eyeRWidth,eyeRHeight);
+		//eyeL.setDrawOvalFilledRed();
+		
+
 	}
 	
 	//draw sad face itself
@@ -161,14 +192,15 @@ class SadFace extends FaceOvalDraw {
 //        g.drawLine(40, 100, 80, 100);
 		//System.out.format("FaceOvalDraw.paintComponent(x=%d,y=%d,w=%d,h=d)\n",
 //		getPositionX(), getPositionY(), getWidth(), getHeight());
-//		eyeL.paintComponent(g);
-//		eyeL.paintComponent(g);
+		eyeL.paintComponent(g);
+		eyeR.paintComponent(g);
+		//eyeL.paintComponent(g);
 //		g.setColor(Color.black);
 		
-        g.setColor(Color.BLUE);
-        g.fillOval(30, 60, 20, 20);     // eyes
-        g.fillOval(70, 60, 20, 20);
-        g.setColor(Color.RED);          // mouth
+        //g.setColor(Color.BLUE);
+        //g.fillOval(30, 60, 20, 20);     // eyes
+        //g.fillOval(70, 60, 20, 20);
+        //g.setColor(Color.RED);          // mouth
 
 		if (getSmileType() ==1){
 			g.drawArc(getPositionX(),getPositionY()+(getHeight()/2), getWidth(), getHeight()+30, 45,90);
@@ -197,18 +229,26 @@ class SadPanel extends JPanel{
 	//steop 6 create 1 of them
 	//create collectiomn of sadpanels
 	private SadFace mySadFace;
+	private SadFace mySadFace1;
 
 
 	
 	public SadPanel() {
 		//constructor
+//		Random rand = new Random(); 
+//		int SmileTypeIn = rand.nextInt(3); 
+//		setSmileType(1);
+		//int SmileTypeIn = 1; 
+		//setSmileType(1);
 		Random rand = new Random(); 
-		//int mySadFaceIn = rand.nextInt(3); 
-		int SmileTypeIn = 1; 
+		int SmileTypeIn = rand.nextInt(3); 
+		//setSmileType(SmileTypeIn);
+		//setSmileType(3);
 		
 		//mySadFace = new SadFace(10, 30, 100, 100,SmileTypeIn);
-		mySadFace = new SadFace(10, 30, 100, 100,2);
-		//mySadFace = new SadFace(100, 30, 100, 100,2);
+		//mySadFace = new SadFace(10, 30, 100, 100,2);
+		mySadFace = new SadFace(10, 30, 100, 100,SmileTypeIn);
+		mySadFace1 = new SadFace(400, 30, 100, 100,SmileTypeIn);
 		
 	}
 	public void paintComponent(Graphics g) {	
@@ -233,6 +273,7 @@ class SadPanel extends JPanel{
 		System.out.println("Facelite panel paint...");
 		
 		mySadFace.paintComponent(g);
+		mySadFace1.paintComponent(g);
 		System.out.println("printed Face lite panel paint...");		
 	}
 }
@@ -272,7 +313,9 @@ class SadPanel extends JPanel{
 			myFrame.setVisible(true);
 			//step3 add Panel to Frame
 			SadPanel mySadPanel = new SadPanel();
-			myFrame.add(mySadPanel);	
+			myFrame.add(mySadPanel);
+			SadPanel mySadPanel1 = new SadPanel();
+			myFrame.add(mySadPanel1);
 
 		}
 	}
