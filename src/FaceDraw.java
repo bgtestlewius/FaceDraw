@@ -71,28 +71,14 @@ class FaceOvalDraw extends Oval{
 	public final void setSmileType(int smileTypeIn) {SmileType= smileTypeIn;}
 	public final int getSmileType() {return SmileType;}
 	
-	//abstract public double BuildFace();
 	
-//	public String toString() {
-//		return String.format("positionX=%03d,positionY=%03d, width%03d, height%03d,smileType%03d", positionX,positionY,width,height,SmileType);
-//	}
+	public String toString() {
+		return String.format("positionX=%03d,positionY=%03d, width%03d, height%03d,smileType%03d", positionX,positionY,width,height,SmileType);
+	}
 
 		public void paintComponent(Graphics g) {
 			g.drawOval(getPositionX(), getPositionY(), getWidth(), getHeight());
-			
-//			if (getSmileType() ==1){
-//				g.drawArc(getPositionX(),getPositionY()+(getHeight()/2), getWidth(), getHeight()+30, 45,90);
-//				//System.out.println(getSmileType());
-//			}
-//			else if (getSmileType() ==2)
-//				{g.drawArc(getPositionX()+5,getPositionY()+(getHeight()/100), getWidth()-10, getHeight()-30, -45,-90);
-//				//System.out.println(getSmileType());
-//				}
-//			else 
-//			//{g.drawLine(getPositionX(),getPositionY()+(getHeight()/2), 0, 0);
-//				{g.drawArc(getPositionX()+15,getPositionY()+(getHeight()-30), getWidth()-30, 0, -45,-90);
-//				//System.out.println(getSmileType());
-//			}
+
 			
 			int eyeLHeight = getHeight() / 5;
 			int eyeLWidth = eyeLHeight /2;
@@ -105,8 +91,6 @@ class FaceOvalDraw extends Oval{
 			int eyeRPostionX = getPositionX() + (getWidth() - 40) - (eyeRWidth /4);
 			int eyeRPositionY = getPositionY() + (getHeight()/ 3) - (eyeRHeight /2) ;
 
-			//eyeL = new FaceOvalDraw(eyeLPostionX,eyeLPositionY,eyeLWidth,eyeLHeight);
-			//eyeR = new FaceOvalDraw(eyeRPostionX,eyeRPositionY,eyeRWidth,eyeRHeight);
 			g.drawOval(eyeRPostionX, eyeRPositionY, eyeRWidth, eyeRHeight);
 			g.drawOval(eyeLPostionX, eyeLPositionY, eyeLWidth, eyeLHeight);
 			
@@ -133,12 +117,8 @@ class Face extends FaceOvalDraw {
 
 
 	public Face() {
-		//super(0,0,0,0,0);
-		//this(positionXIn, positionYIn, widthIn, heightIn, SmileTypeIn)
 		this(0,0,0,0,0);
-		//this.setFace(getPositionX(), getPositionY(), getWidth(), getHeight(), getSmileType());
-		//eyeL = new FaceOvalDraw(0,0,0,0);
-		//eyeR = new FaceOvalDraw(0,0,0,0);		
+	
 	}
 	
 	
@@ -148,14 +128,7 @@ class Face extends FaceOvalDraw {
 		
 	}
 	
-//	public Face(int positionXIn, int positionYIn, int widthIn, int heightIn, int SmileTypeIn){
-//		super(widthIn,heightIn,positionXIn,positionYIn,SmileTypeIn);
-//		setWidth(widthIn);
-//		setHeight(heightIn);
-//		setpositionX(positionXIn);
-//		setpositionY(positionYIn);
-//		setSmileType(SmileTypeIn);
-		
+
 		Face(int positionXIn, int positionYIn, int widthIn, int heightIn, int SmileTypeIn){
 			super(widthIn,heightIn,positionXIn,positionYIn,SmileTypeIn);
 			setWidth(widthIn);
@@ -166,16 +139,12 @@ class Face extends FaceOvalDraw {
 			
 			this.setFace(getPositionX(), getPositionY(), getWidth(), getHeight(),SmileTypeIn);
 			
-			//eyeL = new FaceOvalDraw(positionXIn,positionYIn,widthIn,heightIn);
-			//eyeR = new FaceOvalDraw(positionXIn,positionYIn,widthIn,heightIn);	
 		
 		
 		//setSmileType(3);
 		Random rand = new Random(); 
 		int SmilesTypeIn = rand.nextInt(3); 
-		//setSmileType(SmilesTypeIn);
-		setSmileType(SmilesTypeIn);
-//		
+		setSmileType(SmilesTypeIn);	
 		int eyeLHeight = heightIn / 5;
 		int eyeLWidth = eyeLHeight /2;
 		int eyeLPostionX = positionXIn + (widthIn / 4) - (eyeLWidth / 4);
@@ -200,44 +169,27 @@ class Face extends FaceOvalDraw {
 	//draw sad face itself
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		
-		
-
-		//eyeL.paintComponent(g);
-		//eyeR.paintComponent(g);
-
 
 		if (getSmileType() ==1){
 			g.drawArc(getPositionX(),getPositionY()+(getHeight()/2), getWidth(), getHeight()+30, 45,90);
-			//eyeL.paintComponent(g);
-			//eyeR.paintComponent(g);
 
-			
-			//System.out.println(getSmileType());
 		}
 		else if (getSmileType() ==2)
 			{g.drawArc(getPositionX()+5,getPositionY()+(getHeight()/100), getWidth()-10, getHeight()-30, -45,-90);
 			System.out.println(getSmileType());
-			//eyeL.paintComponent(g);
-			//eyeR.paintComponent(g);
+
 
 			}
 		else if (getSmileType() ==3)
-			//{g.drawArc(getPositionX()+5,getPositionY()+(getHeight()/100), getWidth()-10, getHeight()-30, -45,-90)
+
 			{g.drawArc(getPositionX()+15,getPositionY()+(getHeight()-30), getWidth()-30, 0, -45,-90);
 		System.out.println(getSmileType());
-			//eyeL.paintComponent(g);
-			//eyeR.paintComponent(g);
+
 
 			}
 		else
-			//g.drawLine(getPositionX(),getPositionY()+(getHeight()/2), 0, 0);
 			g.drawArc(getPositionX()+15,getPositionY()+(getHeight()-30), getWidth()-30, 0, -45,-90);
-//			System.out.println(getSmileType());
-			//eyeL.paintComponent(g);
-			//eyeR.paintComponent(g);
-//
-//				
+				
 	}
 }		
 
@@ -248,6 +200,10 @@ class FacePanel extends JPanel{
 
 	private Face myFace;
 	private Face myFace1;
+	private Face myFace2;
+	private Face myFace3;
+	private Face myFace4;
+	private Face myFace5;
 
 
 	
@@ -255,8 +211,11 @@ class FacePanel extends JPanel{
 		//constructor
 		Random rand = new Random(); 
 		int SmileTypeIn = rand.nextInt(3); 
-		myFace = new Face(10, 30, 100, 100,SmileTypeIn);
-		myFace1 = new Face(400, 30, 100, 100,SmileTypeIn);
+		myFace = new Face(10, 30, 100, 200,SmileTypeIn);
+		myFace1 = new Face(500, 100, 100, 100,SmileTypeIn);
+		myFace2 = new Face(300, 30, 200, 100,SmileTypeIn);
+		myFace3 = new Face(400, 400, 300, 200,SmileTypeIn);
+		myFace4= new Face(10, 400, 100, 300,SmileTypeIn);
 		
 	}
 	public void paintComponent(Graphics g) {	
@@ -264,6 +223,9 @@ class FacePanel extends JPanel{
 		
 		myFace.paintComponent(g);
 		myFace1.paintComponent(g);
+		myFace2.paintComponent(g);
+		myFace3.paintComponent(g);
+		myFace4.paintComponent(g);
 		//System.out.println("printed Face lite panel paint...");		
 	}
 }
@@ -293,17 +255,16 @@ class FacePanel extends JPanel{
 		public static void main(String[] args) {
 			//System.out.println("Starting Face Draw...");
 			//using jFrame
-			//JFrame myFrame = new FaceFrame();
-			JFrame.setDefaultLookAndFeelDecorated(true);
-			JFrame myFrame = new JFrame("Face Draw");
-			myFrame.setBounds(100, 100, 900, 900);
-			myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			myFrame.setVisible(true);
-			//step3 add Panel to Frame
-			FacePanel mySadPanel = new FacePanel();
-			myFrame.add(mySadPanel);
-			FacePanel mySadPanel1 = new FacePanel();
-			myFrame.add(mySadPanel1);
+			JFrame myFrame = new FaceFrame();
+		
+			System.out.println("Starting Face Draw...");
+
+		
+			ArrayList<FaceFrame> FaceList = new ArrayList<FaceFrame>();
+			for (int loopCount=1; loopCount<4; loopCount++){
+				//FacesPanel myFacesPanel = new FacesPanel();
+				myFrame.add(new FacePanel());
+			}	
 			
 			
 
