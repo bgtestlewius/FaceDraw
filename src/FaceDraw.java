@@ -7,9 +7,6 @@
 import javax.swing.JFrame;
 import java.awt.Graphics;
 import javax.swing.JPanel;
-
-import sun.awt.RepaintArea;
-
 import java.awt.Color;
 import java.awt.Frame;
 import java.util.ArrayList;
@@ -93,6 +90,7 @@ class FaceOvalDraw extends Oval{
 
 			g.drawOval(eyeRPostionX, eyeRPositionY, eyeRWidth, eyeRHeight);
 			g.drawOval(eyeLPostionX, eyeLPositionY, eyeLWidth, eyeLHeight);
+			System.out.format("positionX=%03d,positionY=%03d, width%03d, height%03d,smileType%03d", positionX,positionY,width,height,SmileType);
 			
 			
 		
@@ -172,23 +170,27 @@ class Face extends FaceOvalDraw {
 
 		if (getSmileType() ==1){
 			g.drawArc(getPositionX(),getPositionY()+(getHeight()/2), getWidth(), getHeight()+30, 45,90);
+			System.out.format("positionX=%03d,positionY=%03d, width%03d, height%03d,smileType%03d", getPositionX(), getPositionY(), getWidth(), getHeight(),getSmileType());
 
 		}
 		else if (getSmileType() ==2)
 			{g.drawArc(getPositionX()+5,getPositionY()+(getHeight()/100), getWidth()-10, getHeight()-30, -45,-90);
 			System.out.println(getSmileType());
+			System.out.format("positionX=%03d,positionY=%03d, width%03d, height%03d,smileType%03d", getPositionX(), getPositionY(), getWidth(), getHeight(),getSmileType());
 
 
 			}
 		else if (getSmileType() ==3)
 
 			{g.drawArc(getPositionX()+15,getPositionY()+(getHeight()-30), getWidth()-30, 0, -45,-90);
-		System.out.println(getSmileType());
+			System.out.println(getSmileType());
+			System.out.format("positionX=%03d,positionY=%03d, width%03d, height%03d,smileType%03d", getPositionX(), getPositionY(), getWidth(), getHeight(),getSmileType());
 
 
 			}
 		else
 			g.drawArc(getPositionX()+15,getPositionY()+(getHeight()-30), getWidth()-30, 0, -45,-90);
+			System.out.format("positionX=%03d,positionY=%03d, width%03d, height%03d,smileType%03d", getPositionX(), getPositionY(), getWidth(), getHeight(),getSmileType());
 				
 	}
 }		
@@ -239,11 +241,15 @@ class FacePanel extends JPanel{
 			//step 1 create jframe
 			JFrame.setDefaultLookAndFeelDecorated(true);
 			JFrame myFrame = new JFrame("Face Draw");
+			myFrame.setbou
 			myFrame.setBounds(100, 100, 900, 900);
 			myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			myFrame.setVisible(true);	
+//			myFrame.setVisible(true);	
+//			FacePanel myFacesPanel = new FacePanel();
+//			myFrame.add(myFacesPanel);
 			FacePanel myFacesPanel = new FacePanel();
 			myFrame.add(myFacesPanel);
+			myFrame.setVisible(true);	
 
 
 	}
